@@ -5,10 +5,10 @@ function register(event) {
     var userPhone = document.getElementById("userPhone").value;
     var userEmail = document.getElementById("userEmail").value;
     var userPassword = document.getElementById("userPassword").value;
-    var userData = { name: userName, number: userPhone, email: userEmail, password: userPassword }
+    var AmazonuserData = { name: userName, number: userPhone, email: userEmail, password: userPassword }
 
     // storing data from js to ls
-    var dataFromLS = JSON.parse(localStorage.getItem("userData")) || [];
+    var dataFromLS = JSON.parse(localStorage.getItem("AmazonuserData")) || [];
     console.log(dataFromLS, 'dataFromLS')
     var flag = false;
     for (var i = 0; i < dataFromLS.length; i++) {
@@ -23,8 +23,8 @@ function register(event) {
     } else if (userPassword.length < 8) {
         alert("password must be more than 8 digit")
     } else {
-        dataFromLS.push(userData);
-        localStorage.setItem("userData", JSON.stringify(dataFromLS));
+        dataFromLS.push(AmazonuserData);
+        localStorage.setItem("AmazonuserData", JSON.stringify(dataFromLS));
         document.getElementById("userName").value = " ";
         document.getElementById("userPhone").value = " ";
         document.getElementById("userEmail").value = " ";
@@ -39,9 +39,9 @@ function login(event) {
     event.preventDefault();
     var userEmail = document.getElementById("email").value;
     var userPassword = document.getElementById("password").value;
-    var userData = { email: userEmail, password: userPassword }
+    var AmazonuserData = { email: userEmail, password: userPassword }
 
-    var dataFromLS = JSON.parse(localStorage.getItem("userData")) || [];
+    var dataFromLS = JSON.parse(localStorage.getItem("AmazonuserData")) || [];
     console.log(dataFromLS, 'dataFromLS')
     var flag = false;
     for (var i = 0; i < dataFromLS.length; i++) {
@@ -50,8 +50,8 @@ function login(event) {
         }
     }
     if (flag === true) {
-        dataFromLS.push(userData);
-        localStorage.setItem("userData", JSON.stringify(dataFromLS));
+        dataFromLS.push(AmazonuserData);
+        localStorage.setItem("AmazonuserData", JSON.stringify(dataFromLS));
         document.getElementById("email").value = " ";
         document.getElementById("password").value = " ";
         window.location.href = '/amazonhome.html';
@@ -60,4 +60,72 @@ function login(event) {
 
         alert("Wrong cred, Please check your email and password");
     }
+}
+
+var gettingEmail;
+function forgetPassword() {
+
+    var dataFromLS = JSON.parse(localStorage.getItem("AmazonuserData"));
+    var userEmail = document.getElementById("email").value;
+    gettingEmail = userEmail;
+
+    var flag = false;
+    for (var i = 0; i < dataFromLS.length; i++) {
+        if (dataFromLS[i].email === userEmail) {
+            flag = true;
+        }
+    }
+    if (flag === true) {
+        // window.location.href = '/newpass.html';
+
+        var newCode = `<input type = "password" id ="password" > <br> <button  id="regdiv" onclick="newPassword()">set new password</button>`
+        var divFromHtml = document.getElementById("change")
+        divFromHtml.innerHTML = newCode;
+        alert(" now set new password")
+    }
+    else {
+        alert(" email not found ,check email again ")
+    }
+
+
+}
+
+
+function newPassword() {
+    var userPassword = document.getElementById("password").value;
+    var dataFromLS = JSON.parse(localStorage.getItem("AmazonuserData"));
+    //    alert ("worked")
+
+
+    for (var i = 0; i < dataFromLS.length; i++) {
+        if (dataFromLS[i].email === gettingEmail) {
+            dataFromLS[i].password = userPassword
+        }
+    }
+    localStorage.setItem('AmazonuserData', JSON.stringify(dataFromLS));
+    gettingEmail = "";
+
+    window.location.href = '/amazonlogin.html';
+    alert("password change now login")
+
+}
+
+function addToLS() {
+    alert("product added")
+    var Name = document.getElementById("proName").value;
+    var Imge = document.getElementById("proImg").value;
+    var Price = document.getElementById("proPrice").value;
+
+    var userProduct = {  proImg:Imge, proName: Name, proPrice:Price }
+    // store deta from java script to local storage
+    var dataFromLS = JSON.parse(localStorage.getItem("userProduct")) || [];
+    console.log(dataFromLS, 'dataFromLS')
+  
+    dataFromLS.push(userProduct);
+    localStorage.setItem("userProduct", JSON.stringify(dataFromLS));
+    alert("product added")
+     
+    var Name = document.getElementById("proName").value ="" ;
+    var Imge = document.getElementById("proImg").value ="";
+    var Price = document.getElementById("proPrice").value ="";
 }
