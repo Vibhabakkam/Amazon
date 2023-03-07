@@ -7,15 +7,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>amazon add product</title>
     <style>
-        
+         #proName {
+            height: 40px;
+            width: 300px;
+            border-color: gray;
+            margin-left: 50px;
+            outline: none;
+            margin-top: 30px;
+            font-size: 20px;
+        }
+
+        #proImg {
+            height: 40px;
+            width: 300px;
+            border-color: gray;
+            margin-left: 50px;
+            outline: none;
+            margin-top: 30px;
+            font-size: 20px;
+        }
+
+        #proPrice {
+            height: 40px;
+            width: 300px;
+            border-color: gray;
+            margin-left: 50px;
+            outline: none;
+            margin-top: 30px;
+            font-size: 20px;
+        }
+        #regdiv {
+            height: 40px;
+            width: 120px;
+            border: none;
+            font-size: 20px;
+            background-color: #d5a249;
+            color: white;
+            margin-left: 50px;
+            margin-top: 15px;
+        }
+        #body{
+            height: 400px;
+            margin-left: 550px;
+            margin-top: 150px;
+        }
     </style>
 </head>
 <body>
-    <h1>add products</h1>
-    <input id="proName" type="url" placeholder="product img"> <br>
-    <input id="proImg" type="text" placeholder="product name"> <br>
+    <div id="body">
+    <h1>Add products on Amazon </h1>
+    <input id="proName" type="url" placeholder="product name"> <br>
+    <input id="proImg" type="text" placeholder="product img"> <br>
     <input id="proPrice" type="number" placeholder="product price"> <br>
-    <button onclick="addToLS()"> add product</button>
+    <button id="regdiv" onclick="addToLS()"> add product</button>
+</div>
     <script src="server.js"></script>
 </body>
 </html>
