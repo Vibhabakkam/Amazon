@@ -1,136 +1,138 @@
-function register(event) {
-    // getting data from html to js
+function register(event){
     event.preventDefault();
-    var userName = document.getElementById("userName").value;
-    var userPhone = document.getElementById("userPhone").value;
-    var userEmail = document.getElementById("userEmail").value;
-    var userPassword = document.getElementById("userPassword").value;
-    var AmazonuserData = { name: userName, number: userPhone, email: userEmail, password: userPassword }
 
-    // storing data from js to ls
-    var dataFromLS = JSON.parse(localStorage.getItem("AmazonuserData")) || [];
-    console.log(dataFromLS, 'dataFromLS')
-    var flag = false;
-    for (var i = 0; i < dataFromLS.length; i++) {
-        if (dataFromLS[i].email === userEmail) {
-            flag = true;
+    var userName= document.getElementById("userName").value;
+    var userEmail =document.getElementById("userEmail").value;
+    var userPassword =document.getElementById("userPassword").value;
+    var amazonuserData = { name:userName, email:userEmail, password:userPassword };
+
+    var dataFromLs =JSON.parse(localStorage.getItem("amazonuserData")) || [];
+    console.log(dataFromLs,"dataFromLs");
+
+    var flag =false;
+    for(var i=0; i<dataFromLs.length;i++){
+        if(dataFromLs[i].email === userEmail){
+            flag =true;
         }
     }
-    if (flag === true) {
-        alert("Email already present, use another one")
-    } else if (userPassword.length < 1 && userName.length < 1 && userEmail.length < 1) {
-        alert("must fill all fields")
-    } else if (userPassword.length < 8) {
-        alert("password must be more than 8 digit")
-    } else {
-        dataFromLS.push(AmazonuserData);
-        localStorage.setItem("AmazonuserData", JSON.stringify(dataFromLS));
-        document.getElementById("userName").value = " ";
-        document.getElementById("userPhone").value = " ";
-        document.getElementById("userEmail").value = " ";
-        document.getElementById("userPassword").value = " ";
-        window.location.href = "/amazonlogin.html";
-        alert("Registration done");
-       
+
+    if (flag === true){
+        alert("Email already Present");
+        document.getElementById("userEmail").value ='';
+    }
+    else if(userName.length < 1 && userEmail.length <1){
+        alert("must filled all fields");
+    }
+    else if(userPassword.length < 8){
+        alert("Password Must be more than 8 digit");
+        document.getElementById("userPassword").value ="";
+    }
+    else{
+        dataFromLs.push(amazonuserData);
+        localStorage.setItem("amazonuserData",JSON.stringify(dataFromLs));
+        document.getElementById("userName").value ='';
+        document.getElementById("userEmail").value ='';
+        document.getElementById("userPassword").value ="";
+        window.location.href ="/amazonlogin.html";
+        alert("registration Done");
     }
 }
 
-function login(event) {
-    event.preventDefault();
-    var userEmail = document.getElementById("email").value;
+function login(event){
+    event.preventDefault(event);
+    var userEmail =document.getElementById("email").value;
     var userPassword = document.getElementById("password").value;
-    var AmazonuserData = { email: userEmail, password: userPassword }
 
-    var dataFromLS = JSON.parse(localStorage.getItem("AmazonuserData")) || [];
-    console.log(dataFromLS, 'dataFromLS')
-    var flag = false;
-    for (var i = 0; i < dataFromLS.length; i++) {
-        if (dataFromLS[i].email === userEmail && dataFromLS[i].password === userPassword) {
-            flag = true;
+    var dataFromLs =JSON.parse(localStorage.getItem("amazonuserData"));
+
+    var flag= false;
+
+    for (var i=0 ; i< dataFromLs.length ; i++){
+        if(dataFromLs[i].email === userEmail  && dataFromLs[i].password === userPassword){
+            flag =true;
         }
     }
-    if (flag === true) {
-        alert("login succecfully")
-        dataFromLS.push(AmazonuserData);
-        localStorage.setItem("AmazonuserData", JSON.stringify(dataFromLS));
-        document.getElementById("email").value = " ";
-        document.getElementById("password").value = " ";
-        var User = {};
-        User = { email: userEmail }
-        localStorage.setItem("currentUser", JSON.stringify(User));
 
+    if(flag){
+        document.getElementById("email").value ="";
+        document.getElementById("password").value ="";
 
-        window.location.href = '/amazonhome.html';
-    } else {
-
-        alert("Wrong cred, Please check your email and password");
+        var user ={};
+        user["current-user-email"]= userEmail;
+        localStorage.setItem("currentUser",JSON.stringify(user));
+        window.location.href="/amazonhome.html";
+        alert("Login sucessful");
     }
-}
+    else{
+        alert("Email or Password does not match");
+    }
 
+}
 var gettingEmail;
-function forgetPassword() {
 
-    var dataFromLS = JSON.parse(localStorage.getItem("AmazonuserData"));
-    var userEmail = document.getElementById("email").value;
-    gettingEmail = userEmail;
+function forgotPassword(event){
+    event.preventDefault();
+    
+    var dataFromLs=JSON.parse(localStorage.getItem("amazonuserData"));
+    var emailFromUser =document.getElementById("email").value;
+
+    gettingEmail =emailFromUser;
 
     var flag = false;
-    for (var i = 0; i < dataFromLS.length; i++) {
-        if (dataFromLS[i].email === userEmail) {
-            flag = true;
+    for(var i=0; i<dataFromLs.length; i++){
+        if(dataFromLs[i].email === emailFromUser){
+            flag =true;
         }
     }
-    if (flag === true) {
-        // window.location.href = '/newpass.html';
+    if(flag){
+        var newCode =`<input type="password" id="password"><br><button onClick="newPassword()"Reset> New Password</button>`;
+        var divFromHtml =document.getElementById("change");
+        divFromHtml.innerHTML =newCode;
+        alert("Now set New Password");
 
-        var newCode = `<input type = "password" id ="password" > <br> <button  id="regdiv" onclick="newPassword()">set new password</button>`
-        var divFromHtml = document.getElementById("change")
-        divFromHtml.innerHTML = newCode;
-        alert(" now set new password")
     }
-    else {
-        alert(" email not found ,check email again ")
+    else{
+        alert("Please Enter Register Email");
+        document.getElementById("email").value ="";
     }
-
-
 }
 
+function newPassword(){
+    
+    var dataFromLs =JSON.parse(localStorage.getItem("amazonuserData"));
+    var userPassword =document.getElementById("password").value;
 
-function newPassword() {
-    var userPassword = document.getElementById("password").value;
-    var dataFromLS = JSON.parse(localStorage.getItem("AmazonuserData"));
-    //    alert ("worked")
-
-
-    for (var i = 0; i < dataFromLS.length; i++) {
-        if (dataFromLS[i].email === gettingEmail) {
-            dataFromLS[i].password = userPassword
+    // console.log(passwordFromUser,"Password");
+    for(var i=0; i<dataFromLs.length; i++){
+        if(dataFromLs[i].email === gettingEmail){
+            dataFromLs[i].password = userPassword;
         }
     }
-    localStorage.setItem('AmazonuserData', JSON.stringify(dataFromLS));
-    gettingEmail = "";
+     // console.log(passwordFromUser,"Password");
 
-    window.location.href = '/amazonlogin.html';
-    alert("password change now login")
+    localStorage.setItem("amazonuserData",JSON.stringify(dataFromLs));
+    gettingEmail ="";
+    // divFromHtml.innerHTML =rest;
+    window.location.href ="/amazonlogin.html";
+    alert("Password Changed , Now Login");
 
+    
 }
 
-function addToLS() {
-    alert("product added")
-    var Name = document.getElementById("proName").value;
-    var Imge = document.getElementById("proImg").value;
-    var Price = document.getElementById("proPrice").value;
+function addToLS(){
 
-    var amazonuserProduct = {  proImg:Imge, proName: Name, proPrice:Price }
-    // store deta from java script to local storage
-    var dataFromLS = JSON.parse(localStorage.getItem("amazonuserProduct")) || [];
-    console.log(dataFromLS, 'dataFromLS')
-  
-    dataFromLS.push(amazonuserProduct);
-    localStorage.setItem("amazonuserProduct", JSON.stringify(dataFromLS));
-    alert("product added")
+    var dataFromLs =JSON.parse(localStorage.getItem("amazonproduct")) || [];
 
-    var Name = document.getElementById("proName").value ="" ;
-    var Imge = document.getElementById("proImg").value ="";
-    var Price = document.getElementById("proPrice").value ="";
+    var userName = document.getElementById("name").value;
+    var userImage= document.getElementById("image").value;
+    var price =document.getElementById("price").value;
+
+    var amazonproduct ={name:userName, image:userImage, price:price};
+    dataFromLs.push(amazonproduct);
+
+    localStorage.setItem("amazonproduct",JSON.stringify(dataFromLs));
+    alert("Added");
+    var userName = document.getElementById("name").value = "";
+    var userImage= document.getElementById("image").value = "";
+    var price =document.getElementById("price").value = "";
 }
