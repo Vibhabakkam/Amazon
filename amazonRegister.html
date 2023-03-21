@@ -1,41 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register</title>
-    <style>
-      body {
-        text-align: center;
-      }
-      form {
-        width: 18%;
-        margin: auto;
-        height: 150px;
-        border: 1px solid black;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Register</h1>
-    <form onsubmit="register(event)">
-      <label>Name</label><br />
-      <input id="userName" type="text" /><br />
-      <label>Email</label><br />
-      <input id="userEmail" type="email" /><br />
-      <label>Password</label><br />
-      <input id="userPassword" type="password" /><br />
-      <input type="submit" value="register" />
-    </form>
-    <script src="/server.js"></script>
 
-    <script>
-      var dataFromLs = JSON.parse(localStorage.getItem("currentUser"));
-      if (dataFromLs) {
-        window.location.href ="/amazonhome.html";
-        alert("Already Login");
-      }
-    </script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register</title>
+  <style>
+    #maindiv {
+      margin-top: 30px;
+      margin-left: 550px;
+      height: 500px;
+      width: 400px;
+
+    }
+
+    #imgdiv {
+      display: flex;
+      height: 200px;
+      width: 350px;
+      margin-bottom: -80px;
+      margin-left: 25px;
+      margin-top: 20px;
+    }
+
+    #lablediv {
+      font-size: 20px;
+      margin-left: 50px;
+
+    }
+
+    #userName {
+      height: 40px;
+      width: 300px;
+      font-size: 20px;
+      margin-left: 50px;
+      margin-bottom: 15px;
+    }
+
+    #userEmail {
+      height: 40px;
+      width: 300px;
+      font-size: 20px;
+      margin-left: 50px;
+      margin-bottom: 15px;
+    }
+
+    #userPassword {
+      height: 40px;
+      width: 300px;
+      font-size: 20px;
+      margin-left: 50px;
+    }
+
+    #paradiv {
+      height: 40px;
+      width: 300px;
+      background-color: #f2cb69;
+      color: white;
+      font-size: 20px;
+      border: none;
+      margin-left: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="maindiv">
+    <div id="imgdiv">
+      <img src="https://www.adgully.com/img/800/201910/image002.png.jpg" alt="">
+    </div>
+    <h1>Create Account</h1>
+    <form onsubmit="register(event)">
+      <label id="lablediv">Name</label><br />
+      <input id="userName" type="text" placeholder="Type your name" /><br />
+      <label id="lablediv">Email</label><br />
+      <input id="userEmail" type="email" placeholder="Type your email" /><br />
+      <label id="lablediv">Password</label><br />
+      <input id="userPassword" type="password" placeholder="Type your password" /><br />
+      <p>By enrolling your mobile phone number, you consent to receive automated security notifications via text message
+        from Amazon. Message and data rates may apply.</p>
+      <input id="paradiv" type="submit" value="CONTINUE" />
+      <p>By creating an account or logging in, you agree to Amazon’s <span style="color: #0569c1;">Conditions of
+          Use</span> and <span style="color: #0569c1;">Privacy Policy.</span></p>
+    </form>
+  </div>
+  <script src="/server.js"></script>
+
+  <script>
+    var dataFromLs = JSON.parse(localStorage.getItem("currentUser"));
+    if (dataFromLs) {
+      window.location.href = "/amazonhome.html";
+      alert("Already Login");
+    }
+  </script>
+</body>
+
 </html>

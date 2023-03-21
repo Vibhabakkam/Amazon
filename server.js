@@ -85,7 +85,7 @@ function forgotPassword(event){
         }
     }
     if(flag){
-        var newCode =`<input type="password" id="password"><br><button onClick="newPassword()"Reset> New Password</button>`;
+        var newCode =`<input type="password" id="password"><br><button id = "paradiv2" onClick="newPassword()"Reset> New Password</button>`;
         var divFromHtml =document.getElementById("change");
         divFromHtml.innerHTML =newCode;
         alert("Now set New Password");
