@@ -1,17 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reset Email</title>
-  </head>
-  <body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reset Email</title>
+  <style>
+    #maindiv {
+      margin-top: 150px;
+      margin-left: 550px;
+      height: 500px;
+      width: 400px;
+
+    }
+
+    #password {
+      height: 40px;
+      width: 300px;
+      font-size: 20px;
+      margin-left: 50px;
+      margin-bottom: 15px;
+    }
+
+    #paradiv {
+      height: 40px;
+      width: 300px;
+      background-color: #f2cb69;
+      color: white;
+      font-size: 20px;
+      border: none;
+      margin-left: 50px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="maindiv">
     <h1>Set New Password</h1>
-    <form onsubmit="resetPassword(event)">
+    <form onsubmit="newPassword(event)">
       <input type="password" id="password" placeholder="New Password" />
-      <input type="submit" value="Continue" />
+      <input id="paradiv" type="submit" value="Continue" />
     </form>
-    <script src="server.js"></script>
-  </body>
+  </div>
+  <script src="server.js"></script>
+</body>
+
 </html>
